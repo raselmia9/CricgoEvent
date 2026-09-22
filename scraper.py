@@ -23,7 +23,7 @@ def scrape_cricgo():
     with open(STATUS_FILE, "w", encoding="utf-8") as f:
         f.write("✦ CricGo Match Cards Scraper Initialized ✦\n")
 
-    update_status("blue", "হোমপেজ থেকে রিয়েল ম্যাচ কার্ড ডাটা ফেচ করা শুরু হয়েছে...")
+    update_status("blue", "হোমপেজ থেকে ম্যাচ কার্ডগুলোর ডেটা সংগ্রহ করা হচ্ছে...")
 
     url = "https://cricgo.pro/"
     headers = {
@@ -40,72 +40,70 @@ def scrape_cricgo():
             
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # সাইডবার মেনু বা ক্যাটাগরি বাদ দিয়ে মূল ম্যাচ কার্ডগুলো খোঁজার জন্য 
-            # সাধারণ ম্যাচ কার্ডের ক্লাস বা কন্টেইনার (যেমন: match-card, match-box অথবা সরাসরি লিঙ্কের স্ট্রাকচার) টার্গেট করা
-            # সাধারণত ম্যাচ কার্ডগুলোতে টিম ও সময়ের তথ্য থাকে
+            # স্ক্রিনশট অনুযায়ী প্রতিটি ম্যাচ কার্ড সাধারণত একটি নির্দিষ্ট ট্যাগ বা লিঙ্কের মধ্যে থাকে
+            # আমরা সরাসরি মূল কার্ডের কন্টেইনার বা a ট্যাগগুলো খুঁজব যেগুলোতে ম্যাচ বা ইভেন্ট আছে
+            cards = soup.find_all('a', href=True)
             
-            # এখানে আপনার সাইটের ম্যাচ কার্ডগুলোর আসল ক্লাস বা কন্টেইনার ট্যাগ দিন (যেমন: 'match-card', 'card', ইত্যাদি)
-            # নিচে একটি আদর্শ ম্যাচ কার্ড স্ট্রাকচার ফিল্টার করার লজিক দেওয়া হলো যা সাইডবার বাদ দেবে:
-            cards = []
-            
-            # সম্ভাব্য ম্যাচ কার্ড বা ম্যাচ আইটেম কন্টেইনার খুঁজছি
-            potential_cards = soup.find_all('div', class_=['match-card', 'card', 'match-item', 'live-match'])
-            
-            if not potential_cards:
-                # যদি নির্দিষ্ট ক্লাস না পাওয়া যায়, তবে যে সমস্ত লিংকের মধ্যে একাধিক টিম লোগো বা 'vs' / সময় রয়েছে সেগুলোকে ফিল্টার করা হবে
-                all_links = soup.find_all('a', href=True)
-                for link in all_links:
-                    href = link.get('href', '')
-                    # সাইডবার মেনুর লিংক যেমন /cricket বা /leagues বাদ দিয়ে শুধুমাত্র ম্যাচ বা স্ট্রিম লিংক ফিল্টার করা
-                    if '/match/' in href or '/stream/' in href or len(link.find_all('img')) >= 2:
-                        cards.append(link)
-            else:
-                cards = potential_cards
-
-            update_status("blue", f"পাওয়া গেছে মোট {len(cards)} সম্ভাব্য কার্ড, ডেটা প্রসেস করা হচ্ছে...")
-
+            valid_cards = []
             for card in cards:
-                # কার্ড থেকে লোগোগুলো সংগ্রহ করা
+                href = card.get('href', '')
+                # শুধুমাত্র ইভেন্ট বা ম্যাচ সম্পর্কিত লিংকগুলো ফিল্টার করা (যেমন /events/ বা অনুরূপ)
+                if '/events/' in href or '/match/' in href:
+                    if card not in valid_cards:
+                        valid_cards.append(card)
+
+            update_status("blue", f"মোট {len(valid_cards)} টি ম্যাচ কার্ড পাওয়া গেছে, ডেটা প্রসেস করা হচ্ছে...")
+
+            for card in valid_cards:
+                # কার্ডের ভেতরের সমস্ত টেক্সট পরিষ্কারভাবে নেওয়া
+                full_text = card.get_text(separator=" ", strip=True)
+                
+                # লোগোগুলো সংগ্রহ করা
                 images = card.find_all('img')
                 logo1 = images[0]['src'] if len(images) > 0 else ""
                 logo2 = images[1]['src'] if len(images) > 1 else ""
                 
-                # টিম বা ইভেন্টের শিরোনাম বের করা
-                # সাইডবার বা ক্যাটাগরি টেক্সট বাদ দেওয়ার জন্য ন্যূনতম শর্ত রাখা হলো
-                title_elem = card.find(['h3', 'h4', 'span', 'div'], class_=['title', 'match-title', 'team-name'])
-                event_title = title_elem.get_text(strip=True) if title_elem else card.get_text(strip=True)
-                
-                # ম্যাচ টাইম বা স্ট্যাটাস (লাইভ বা টাইম) বের করা
-                time_elem = card.find(['span', 'div'], class_=['time', 'match-time', 'badge'])
-                match_time = time_elem.get_text(strip=True) if time_elem else ""
-                
-                stream_link = card.get('href', '') if card.name == 'a' else (card.find('a', href=True).get('href', '') if card.find('a', href=True) else "")
+                # ইভেন্ট বা ম্যাচের শিরোনাম আলাদা করা (রিপিট হওয়া টেক্সট রোধ করতে সুনির্দিষ্ট ক্লিনিং)
+                # যেমন স্ক্রিনশটের হেডিং বা টিম নাম আলাদা করা
+                event_title = full_text.split("Live at")[0].replace("LIVE", "").replace("Starting Soon", "").strip()
+                if not event_title:
+                    event_title = full_text[:60]
 
-                # যদি এটি সাইডবার মেনু না হয়ে আসল ম্যাচ কার্ড হয় (যেমন লোগো আছে অথবা লিংকে নির্দিষ্ট প্যাটার্ন আছে)
-                if logo1 or "vs" in event_title.lower() or "/match/" in stream_link:
-                    match_entry = {
-                        "eventTitle": event_title[:100],
-                        "matchTime": match_time,
-                        "team1Logo": logo1,
-                        "team2Logo": logo2,
-                        "team1Title": "", # প্রয়োজন অনুযায়ী আলাদা করতে পারেন
-                        "team2Title": "",
-                        "streamLink": stream_link,
-                        "isHot": "live" in card.get_text().lower() or "live" in stream_link.lower()
-                    }
-                    if match_entry not in matches_data and stream_link:
-                        matches_data.append(match_entry)
+                # ম্যাচ সময় বা ডেট বের করা
+                match_time = ""
+                if "at" in full_text:
+                    try:
+                        match_time = full_text.split("at")[1].split("UTC")[0].strip() + " UTC"
+                    except:
+                        match_time = ""
+
+                # লাইভ স্ট্যাটাস চেক করা
+                is_live = "live" in full_text.lower()
+
+                match_entry = {
+                    "eventTitle": event_title,
+                    "matchTime": match_time,
+                    "team1Logo": logo1,
+                    "team2Logo": logo2,
+                    "team1Title": "",
+                    "team2Title": "",
+                    "streamLink": card.get('href', ''),
+                    "isHot": is_live
+                }
+                
+                if match_entry not in matches_data and event_title:
+                    matches_data.append(match_entry)
 
             if not matches_data:
-                update_status("yellow", "সতর্কতা: সঠিক ফিল্টারে কোনো ম্যাচ কার্ড পাওয়া যায়নি। অনুগ্রহ করে ম্যাচ কার্ডের নির্দিষ্ট HTML ক্লাস নেম দিন।")
+                update_status("yellow", "সতর্কতা: কোনো কার্ড ফিল্টার করা যায়নি।")
             else:
-                update_status("green", f"সফলভাবে {len(matches_data)} টি রিয়েল ম্যাচ কার্ড এক্সট্রাক্ট করা হয়েছে!")
+                update_status("green", f"সফলভাবে {len(matches_data)} টি কার্ডের সঠিক ডেটা এক্সট্রাক্ট করা হয়েছে!")
 
             # JSON ফাইলে সেভ করা
             with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
                 json.dump(matches_data, f, indent=4, ensure_ascii=False)
                 
-            update_status("green", "সকল ম্যাচ কার্ডের রিয়েল ডাটা data.json ফাইলে সেভ করা হয়েছে!")
+            update_status("green", "সকল ডেটা সফলভাবে data.json ফাইলে সেভ করা হয়েছে!")
 
         else:
             update_status("red", f"সার্ভার এরর: স্ট্যাটাস কোড {response.status_code}")
