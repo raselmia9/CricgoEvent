@@ -23,7 +23,7 @@ def scrape_cricgo():
     with open(STATUS_FILE, "w", encoding="utf-8") as f:
         f.write("✦ CricGo Match Cards Scraper Initialized ✦\n")
 
-    update_status("blue", "হোমপেজ থেকে ম্যাচ কার্ডগুলোর ডেটা সঠিকভাবে পার্স করা হচ্ছে...")
+    update_status("blue", "হোমপেজ থেকে ম্যাচ কার্ডগুলোর ডেটা ফেচ করা হচ্ছে...")
 
     url = "https://cricgo.pro/"
     headers = {
@@ -39,16 +39,23 @@ def scrape_cricgo():
             update_status("green", "হোমপেজ সফলভাবে লোড হয়েছে!")
             
             soup = BeautifulSoup(response.text, 'html.parser')
+            
+            # সাইডবার বা ফুটার বাদ দিয়ে হোমপেজের মূল ম্যাচ কার্ডগুলো বা কন্টেইনারগুলো খোঁজা
+            # সাধারণত যে ট্যাগ বা লিংকের ভেতরে লোগো এবং 'vs' বা সময় থাকে সেগুলোই ম্যাচ কার্ড
             cards = soup.find_all('a', href=True)
             
             valid_cards = []
             for card in cards:
-                href = card.get('href', '')
-                if '/events/' in href or '/match/' in href:
-                    if card not in valid_cards:
-                        valid_cards.append(card)
+                text = card.get_text(separator=" ", strip=True)
+                # যে কার্ডগুলোতে খেলার নাম, 'vs', অথবা সময়/লাইভ লেখা আছে সেগুলোকে টার্গেট করা
+                if len(text) > 5 and ('vs' in text.lower() or 'at' in text.lower() or len(card.find_all('img')) > 0):
+                    # সাইডবার মেনুর লিংকগুলো (যেমন শুধু /cricket বা /leagues) বাদ দেওয়া
+                    href = card.get('href', '')
+                    if href not in ["/", "#"] and not href.startswith("/category") and not href.startswith("/leagues"):
+                        if card not in valid_cards:
+                            valid_cards.append(card)
 
-            update_status("blue", f"মোট {len(valid_cards)} টি কার্ড প্রসেস করা হচ্ছে...")
+            update_status("blue", f"মোট {len(valid_cards)} টি সম্ভাব্য ম্যাচ কার্ড পাওয়া গেছে...")
 
             for card in valid_cards:
                 full_text = card.get_text(separator=" ", strip=True)
@@ -63,8 +70,7 @@ def scrape_cricgo():
                     logo1 = images[0].get('src', '')
                     logo2 = images[1].get('src', '')
 
-                # ১. প্রথমে টাইম এবং লাইভ স্ট্যাটাস অংশটুকু আলাদা করে ফেলা
-                # যেমন: "England vs Sri Lanka England vs Sri Lanka Live at 2026-09-15 17:30:00 UTC"
+                # টেক্সট থেকে অপ্রয়োজনীয় শব্দ পরিষ্কার করা
                 clean_base = full_text
                 for word in ["LIVE", "Starting Soon", "UTC"]:
                     clean_base = clean_base.replace(word, "")
@@ -74,40 +80,30 @@ def scrape_cricgo():
                 else:
                     event_part = clean_base.strip()
 
-                # ২. ডাবল টেক্সট দূর করা (যেমন একই নাম দুইবার থাকলে মাঝখান থেকে কেটে একবার করা)
+                # ডাবল টেক্সট বা রিপিট হওয়া নাম ঠিক করা
                 length = len(event_part)
                 half = length // 2
                 if length > 10 and event_part[:half].strip().lower() == event_part[half:].strip().lower():
                     event_title = event_part[:half].strip()
                 else:
-                    # যদি হুবহু দুই ভাগ না হয়, তবে 'vs' এর আগের অংশ দুইবার থাকলে তা ঠিক করা
-                    if " vs " in event_part.lower():
-                        parts = event_part.split(" vs ")
-                        if len(parts) >= 2 and parts[0].strip().lower() == parts[1].strip().lower()[:len(parts[0])]:
-                            event_title = parts[0].strip() + " vs " + parts[1].strip().replace(parts[0].strip(), "").strip()
-                        else:
-                            event_title = event_part
-                    else:
-                        event_title = event_part
+                    event_title = event_part
 
-                # পরিষ্কার ইভেন্ট টাইটেল থেকে "vs" বা "VS" এর ভিত্তিতে টিম ওয়ান ও টিম টু টাইটেল আলাদা করা
+                # টিম ওয়ান এবং টিম টু টাইটেল আলাদা করা
                 team1_title = ""
                 team2_title = ""
-                
-                # কেস-সেন্সিটিভ সমস্যা এড়াতে ছোট হাতের করে ইনডেক্স বের করা
                 lower_title = event_title.lower()
+                
                 if " vs " in lower_title:
                     idx = lower_title.find(" vs ")
                     team1_title = event_title[:idx].strip()
-                    team2_title = event_title[idx + 4:].strip() # " vs " এর পরের অংশ
+                    team2_title = event_title[idx + 4:].strip()
                 else:
                     team1_title = event_title
 
-                # ম্যাচ টাইম নিখুঁতভাবে এক্সট্রাক্ট করা
+                # ম্যাচ টাইম বা ডেট এক্সট্রাক্ট করা
                 match_time = ""
                 if "at" in full_text:
                     try:
-                        # "2026-09-15 17:30:00 UTC" ফরম্যাট বের করা
                         parts_time = full_text.split("at")
                         raw_time = parts_time[1].strip()
                         if "UTC" in raw_time:
@@ -134,15 +130,15 @@ def scrape_cricgo():
                     matches_data.append(match_entry)
 
             if not matches_data:
-                update_status("yellow", "সতর্কতা: কোনো ম্যাচ ডেটা পাওয়া যায়নি।")
+                update_status("yellow", "সতর্কতা: কোনো ম্যাচ ডেটা ফিল্টার করা যায়নি।")
             else:
-                update_status("green", f"সফলভাবে {len(matches_data)} টি কার্ডের ডেটা প্রসেস করা হয়েছে!")
+                update_status("green", f"সফলভাবে {len(matches_data)} টি ম্যাচ কার্ডের ডেটা প্রসেস করা হয়েছে!")
 
             # JSON ফাইলে সেভ করা
             with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
                 json.dump(matches_data, f, indent=4, ensure_ascii=False)
                 
-            update_status("green", "সংশোধিত ডেটা সফলভাবে data.json ফাইলে সেভ করা হয়েছে!")
+            update_status("green", "সফলভাবে data.json ফাইলে ডেটা সেভ করা হয়েছে!")
 
         else:
             update_status("red", f"সার্ভার এরর: স্ট্যাটাস কোড {response.status_code}")
