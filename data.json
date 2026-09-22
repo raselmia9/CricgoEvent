@@ -1,31 +1,31 @@
 [
     {
-        "eventTitle": "vs England vs Sri Lanka England vs Sri Lanka",
+        "eventTitle": "vs England vs Sri Lanka England vs Sri Lanka Live",
         "matchTime": "2026-09-15 17:30:00 UTC",
         "team1Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
         "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
-        "team1Title": "",
-        "team2Title": "",
+        "team1Title": "vs England",
+        "team2Title": "Sri Lanka England vs Sri Lanka Live",
         "streamLink": "/events/england-vs-sri-lanka",
         "isHot": true
     },
     {
-        "eventTitle": "Asian Games 2026 Asian Games 2026",
+        "eventTitle": "Asian Games 2026 Asian Games 2026 Live",
         "matchTime": "2026-09-24 00:00:00 UTC",
         "team1Logo": "https://cdn.cricgo.pro/league/asian-games/logo.webp",
         "team2Logo": "",
-        "team1Title": "",
+        "team1Title": "Asian Games 2026 Asian Games 2026 Live",
         "team2Title": "",
         "streamLink": "/events/asian-games-2026",
         "isHot": true
     },
     {
-        "eventTitle": "vs Australia vs South Africa Australia vs South Africa",
+        "eventTitle": "vs Australia vs South Africa Australia vs South Africa Live",
         "matchTime": "2026-09-24 08:00:00 UTC",
         "team1Logo": "https://cdn.cricgo.pro/team/australia/logo.webp",
         "team2Logo": "https://cdn.cricgo.pro/team/south-africa/logo.webp",
-        "team1Title": "",
-        "team2Title": "",
+        "team1Title": "vs Australia",
+        "team2Title": "South Africa Australia vs South Africa Live",
         "streamLink": "/events/australia-vs-south-africa",
         "isHot": true
     }
