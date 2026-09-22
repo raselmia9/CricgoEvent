@@ -6,4 +6,4 @@
 🟢 সফলভাবে প্রসেস হয়েছে: https://cricgo.pro/events/asian-games-2026
 🔵 [3] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/australia-vs-south-africa
 🟢 সফলভাবে প্রসেস হয়েছে: https://cricgo.pro/events/australia-vs-south-africa
-🟢 সকল ভুল সংশোধন করে সঠিক লোগো ও মাল্টি-লিংকসহ data.json ফাইলে সেভ করা হয়েছে!
+🟢 এশিয়ান গেমসসহ সকল লোগো এবং লিংক সফলভাবে আপডেট করা হয়েছে!
