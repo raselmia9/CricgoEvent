@@ -64,7 +64,7 @@ def scrape_match_details():
         if not stream_link:
             continue
 
-        update_status("blue", "পেজ ভিজিট করা হচ্ছে: " + stream_link)
+        update_status("blue", f"[{index}/{len(matches)}] পেজ ভিজিট করা হচ্ছে: {stream_link}")
 
         try:
             res = requests.get(stream_link, headers=headers, timeout=15)
@@ -126,33 +126,26 @@ def scrape_match_details():
                         team1_title = parts[0].replace("-", " ").title()
                         team2_title = parts[1].replace("-", " ").title()
 
-                # ৩. চ্যানেলের সঠিক নাম নিখুঁতভাবে এক্সট্রাক্ট করার স্মার্ট লজিক
+                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ (স্ক্রিনশটের গঠন অনুযায়ী)
                 channels = []
-                stream_keywords = ['watch', 'live', 'stream', 'server', 'hd', 'tv', 'sports', 'channel', 'link', 'player', 'willow', 'sony', 'fancode', 'ten']
+                channel_rows = soup.find_all('a', href=True)
                 
-                for a_tag in soup.find_all('a', href=True):
-                    ch_text = a_tag.get_text(separator=" ", strip=True)
-                    ch_lower = ch_text.lower()
-                    
-                    if any(kw in ch_lower for kw in stream_keywords):
-                        # তীরচিহ্ন ও অতিরিক্ত স্পেস বাদ দেওয়া
-                        clean_text = ch_text.replace('↗', '').strip()
+                for ch in channel_rows:
+                    ch_text = ch.get_text(separator=" ", strip=True)
+                    # যে রো বা লিঙ্কে "watch" লেখা আছে সেগুলোকে ফিল্টার করা
+                    if "watch" in ch_text.lower():
+                        # "Watch" এর বাম পাশের অংশটুকু আলাদা করে শুধু চ্যানেলের নাম রাখা[span_1](start_span)[span_1](end_span)
+                        name_part = ch_text.split("Watch")[0].split("watch")[0].strip()
+                        name_part = name_part.replace("✓", "").strip()
                         
-                        # Watch, Live, HD বা প্রতীকগুলোর আগের অংশটুকু কেটে শুধু মূল নাম বা সার্ভার নাম রাখা
-                        parts = re.split(r'\b(watch|live|hd|server|stream)\b|[\|\-\—\–]', clean_text, flags=re.IGNORECASE)
-                        name = parts[0].strip()
+                        if not name_part:
+                            name_part = "Stream Link"
                         
-                        if not name or len(name) < 2:
-                            name = clean_text.strip('|- ↗')
-                        
-                        if not name:
-                            name = "Stream Link"
-                        
-                        ch_href = a_tag.get('href', '')
+                        ch_href = ch.get('href', '')
                         full_ch_link = ch_href if ch_href.startswith("http") else "https://cricgo.pro" + ch_href
                         
                         channel_obj = {
-                            "channelName": name,
+                            "channelName": name_part,
                             "channelLink": full_ch_link
                         }
                         
@@ -185,14 +178,14 @@ def scrape_match_details():
                 }
 
                 updated_matches.append(match_entry)
-                update_status("green", "সফল: " + stream_link + " (চ্যানেল পাওয়া গেছে: " + str(len(channels)) + " টি)")
+                update_status("green", f"সফল: {stream_link} (চ্যানেল পাওয়া গেছে: {len(channels)} টি)")
 
             else:
-                update_status("red", "ফেইলড (স্ট্যাটাস: " + str(res.status_code) + "): " + stream_link)
+                update_status("red", f"ফেইলড (স্ট্যাটাস: {res.status_code}): {stream_link}")
                 updated_matches.append(match)
 
         except Exception as e:
-            update_status("red", "ত্রুটি: " + str(e))
+            update_status("red", f"ত্রুটি: {str(e)}")
             updated_matches.append(match)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
