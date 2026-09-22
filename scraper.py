@@ -82,7 +82,6 @@ def scrape_match_details():
                 for img in images:
                     src = img.get('src', '')
                     if src:
-                        # যদি লিংক রিলেটিভ হয় তবে ডোমেন যুক্ত করে পূর্ণাঙ্গ করা
                         if src.startswith('/'):
                             src = "https://cricgo.pro" + src
                         elif not src.startswith('http'):
@@ -94,7 +93,6 @@ def scrape_match_details():
                 logo1, logo2 = "", ""
                 team1_title, team2_title = "", ""
 
-                # মাঝখানের এশিয়ান গেমস বা স্পেশাল ইভেন্টের লোগো হ্যান্ডলিং
                 if "asian-games" in stream_link:
                     event_title = "ASIAN GAMES 2026"
                     valid_logo = ""
@@ -121,14 +119,29 @@ def scrape_match_details():
                         logo1 = logos[0]
                         logo2 = logos[0]
 
-                    # স্লগ থেকে টিম নাম বের করা
                     slug = stream_link.split("/events/")[-1]
                     if "-vs-" in slug:
                         parts = slug.split("-vs-")
                         team1_title = parts[0].replace("-", " ").title()
                         team2_title = parts[1].replace("-", " ").title()
 
-                # ৩. সময় এক্সট্রাক্ট করা
+                # ৩. মাল্টি-চ্যানেল লিংক এবং নাম সংগ্রহ (আগের মতো নিখুঁতভাবে)
+                channels = []
+                channel_rows = soup.find_all('a', href=True)
+                for ch in channel_rows:
+                    ch_text = ch.get_text(separator=" ", strip=True)
+                    ch_href = ch.get('href', '')
+                    if "Watch" in ch_text or "watch" in ch_text.lower():
+                        channel_name = ch_text.replace("Watch", "").replace("↗", "").strip()
+                        if not channel_name:
+                            channel_name = "Stream Link"
+                        
+                        channels.append({
+                            "channelName": channel_name,
+                            "channelLink": ch_href if ch_href.startswith("http") else "https://cricgo.pro" + ch_href
+                        })
+
+                # ৪. সময় এক্সট্রাক্ট করা
                 raw_time_str = ""
                 page_text = soup.get_text(separator=" ", strip=True)
                 if "UTC" in page_text:
@@ -148,6 +161,7 @@ def scrape_match_details():
                     "team2Logo": logo2,
                     "team1Title": team1_title,
                     "team2Title": team2_title,
+                    "streamLinks": channels, # চ্যানেলের নাম ও লিংকসহ মাল্টি-লিংক অ্যারে
                     "streamLink": stream_link,
                     "isHot": is_live
                 }
@@ -166,7 +180,7 @@ def scrape_match_details():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(updated_matches, f, indent=4, ensure_ascii=False)
 
-    update_status("green", "সকল ডেটা এবং লোগোর লিংক পূর্ণাঙ্গভাবে প্রসেস করা হয়েছে!")
+    update_status("green", "মাল্টি-লিংক এবং লোগোসহ সকল ডেটা সফলভাবে আপডেট করা হয়েছে!")
 
 if __name__ == "__main__":
     scrape_match_details()
