@@ -23,7 +23,7 @@ def scrape_cricgo():
     with open(STATUS_FILE, "w", encoding="utf-8") as f:
         f.write("✦ CricGo Match Cards Scraper Initialized ✦\n")
 
-    update_status("blue", "হোমপেজ থেকে ম্যাচ কার্ডগুলোর ডেটা নিখুঁতভাবে সংগ্রহ করা হচ্ছে...")
+    update_status("blue", "হোমপেজ থেকে ম্যাচ কার্ডগুলোর ডেটা সঠিকভাবে পার্স করা হচ্ছে...")
 
     url = "https://cricgo.pro/"
     headers = {
@@ -53,55 +53,67 @@ def scrape_cricgo():
             for card in valid_cards:
                 full_text = card.get_text(separator=" ", strip=True)
                 
-                # লোগোগুলো সংগ্রহ করা
+                # লোগো সংগ্রহ করা
                 images = card.find_all('img')
                 logo1 = ""
                 logo2 = ""
                 if len(images) == 1:
-                    # যদি একটিমাত্র লোগো থাকে (যেমন টুর্নামেন্ট লোগো)
                     logo1 = images[0].get('src', '')
                 elif len(images) >= 2:
-                    # যদি দুটি টিম লোগো থাকে
                     logo1 = images[0].get('src', '')
                     logo2 = images[1].get('src', '')
 
-                # ইভেন্ট টাইটেল ডাবল আসা রোধ করে পরিচ্ছন্ন করা
-                # সাধারণত ওয়েবসাইটের টেক্সটে নাম দুইবার থাকে, তাই লজিক দিয়ে ইউনিক অংশ বের করা
-                cleaned_title = full_text
-                for status_word in ["LIVE", "Starting Soon", "UTC"]:
-                    cleaned_title = cleaned_title.replace(status_word, "")
+                # ১. প্রথমে টাইম এবং লাইভ স্ট্যাটাস অংশটুকু আলাদা করে ফেলা
+                # যেমন: "England vs Sri Lanka England vs Sri Lanka Live at 2026-09-15 17:30:00 UTC"
+                clean_base = full_text
+                for word in ["LIVE", "Starting Soon", "UTC"]:
+                    clean_base = clean_base.replace(word, "")
                 
-                # ডেট বা টাইম বাদ দিয়ে শুধু মূল নাম রাখা
-                if " at " in cleaned_title:
-                    cleaned_title = cleaned_title.split(" at ")[0]
-                
-                # যদি টেক্সট ডাবল হয়ে থাকে (যেমন "England vs Sri Lanka England vs Sri Lanka") তবে মাঝখান থেকে অর্ধেক কেটে নেওয়া
-                length = len(cleaned_title)
-                half = length // 2
-                if length > 10 and cleaned_title[:half].strip() == cleaned_title[half:].strip():
-                    event_title = cleaned_title[:half].strip()
+                if " at " in clean_base:
+                    event_part = clean_base.split(" at ")[0].strip()
                 else:
-                    event_title = cleaned_title.strip()
+                    event_part = clean_base.strip()
 
-                # 'vs' বা 'VS' দিয়ে টিম ওয়ান এবং টিম টু আলাদা করা
+                # ২. ডাবল টেক্সট দূর করা (যেমন একই নাম দুইবার থাকলে মাঝখান থেকে কেটে একবার করা)
+                length = len(event_part)
+                half = length // 2
+                if length > 10 and event_part[:half].strip().lower() == event_part[half:].strip().lower():
+                    event_title = event_part[:half].strip()
+                else:
+                    # যদি হুবহু দুই ভাগ না হয়, তবে 'vs' এর আগের অংশ দুইবার থাকলে তা ঠিক করা
+                    if " vs " in event_part.lower():
+                        parts = event_part.split(" vs ")
+                        if len(parts) >= 2 and parts[0].strip().lower() == parts[1].strip().lower()[:len(parts[0])]:
+                            event_title = parts[0].strip() + " vs " + parts[1].strip().replace(parts[0].strip(), "").strip()
+                        else:
+                            event_title = event_part
+                    else:
+                        event_title = event_part
+
+                # পরিষ্কার ইভেন্ট টাইটেল থেকে "vs" বা "VS" এর ভিত্তিতে টিম ওয়ান ও টিম টু টাইটেল আলাদা করা
                 team1_title = ""
                 team2_title = ""
-                if " vs " in event_title.lower():
-                    parts = event_title.lower().split(" vs ")
-                    if len(parts) >= 2:
-                        # মূল নামের কেস ঠিক রেখে স্প্লিট করা
-                        split_idx = event_title.lower().find(" vs ")
-                        team1_title = event_title[:split_idx].strip()
-                        team2_title = event_title[split_idx + 4:].strip()
+                
+                # কেস-সেন্সিটিভ সমস্যা এড়াতে ছোট হাতের করে ইনডেক্স বের করা
+                lower_title = event_title.lower()
+                if " vs " in lower_title:
+                    idx = lower_title.find(" vs ")
+                    team1_title = event_title[:idx].strip()
+                    team2_title = event_title[idx + 4:].strip() # " vs " এর পরের অংশ
                 else:
-                    # যদি vs না থাকে (যেমন Asian Games 2026), তবে পুরোটা টিম ওয়ান টাইটেলে বা ইভেন্ট টাইটেলে থাকবে
                     team1_title = event_title
 
-                # ম্যাচ টাইম বের করা
+                # ম্যাচ টাইম নিখুঁতভাবে এক্সট্রাক্ট করা
                 match_time = ""
                 if "at" in full_text:
                     try:
-                        match_time = full_text.split("at")[1].split("UTC")[0].strip() + " UTC"
+                        # "2026-09-15 17:30:00 UTC" ফরম্যাট বের করা
+                        parts_time = full_text.split("at")
+                        raw_time = parts_time[1].strip()
+                        if "UTC" in raw_time:
+                            match_time = raw_time.split("UTC")[0].strip() + " UTC"
+                        else:
+                            match_time = raw_time
                     except:
                         match_time = ""
 
@@ -122,9 +134,9 @@ def scrape_cricgo():
                     matches_data.append(match_entry)
 
             if not matches_data:
-                update_status("yellow", "সতর্কতা: কোনো কার্ড ডাটা পাওয়া যায়নি।")
+                update_status("yellow", "সতর্কতা: কোনো ম্যাচ ডেটা পাওয়া যায়নি।")
             else:
-                update_status("green", f"সফলভাবে {len(matches_data)} টি কার্ডের ডেটা ফিল্টার করা হয়েছে!")
+                update_status("green", f"সফলভাবে {len(matches_data)} টি কার্ডের ডেটা প্রসেস করা হয়েছে!")
 
             # JSON ফাইলে সেভ করা
             with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
