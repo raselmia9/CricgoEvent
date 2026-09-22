@@ -64,7 +64,7 @@ def scrape_match_details():
         if not stream_link:
             continue
 
-        update_status("blue", f"[{index}/{len(matches)}] পেজ ভিজিট করা হচ্ছে: {stream_link}")
+        update_status("blue", "পেজ ভিজিট করা হচ্ছে: " + stream_link)
 
         try:
             res = requests.get(stream_link, headers=headers, timeout=15)
@@ -126,15 +126,24 @@ def scrape_match_details():
                         team1_title = parts[0].replace("-", " ").title()
                         team2_title = parts[1].replace("-", " ").title()
 
-                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ (নিরাপদ ক্লিনিং সহ)
+                # ৩. চ্যানেলের সঠিক নাম নিখুঁতভাবে এক্সট্রাক্ট করার স্মার্ট লজিক
                 channels = []
+                stream_keywords = ['watch', 'live', 'stream', 'server', 'hd', 'tv', 'sports', 'channel', 'link', 'player', 'willow', 'sony', 'fancode', 'ten']
+                
                 for a_tag in soup.find_all('a', href=True):
                     ch_text = a_tag.get_text(separator=" ", strip=True)
-                    if "watch" in ch_text.lower():
-                        # 'watch' বা তীরচিহ্ন বাদ দিয়ে নাম আলাদা করা
-                        name = ch_text.replace("Watch", "").replace("watch", "").replace("↗", "").strip()
-                        # সব ধরনের লাঠি বা হাইফেন পরিষ্কার করা
-                        name = re.sub(r'[\|\-\—\–]+', '', name).strip()
+                    ch_lower = ch_text.lower()
+                    
+                    if any(kw in ch_lower for kw in stream_keywords):
+                        # তীরচিহ্ন ও অতিরিক্ত স্পেস বাদ দেওয়া
+                        clean_text = ch_text.replace('↗', '').strip()
+                        
+                        # Watch, Live, HD বা প্রতীকগুলোর আগের অংশটুকু কেটে শুধু মূল নাম বা সার্ভার নাম রাখা
+                        parts = re.split(r'\b(watch|live|hd|server|stream)\b|[\|\-\—\–]', clean_text, flags=re.IGNORECASE)
+                        name = parts[0].strip()
+                        
+                        if not name or len(name) < 2:
+                            name = clean_text.strip('|- ↗')
                         
                         if not name:
                             name = "Stream Link"
@@ -176,14 +185,14 @@ def scrape_match_details():
                 }
 
                 updated_matches.append(match_entry)
-                update_status("green", f"সফল: {stream_link} (চ্যানেল পাওয়া গেছে: {len(channels)} টি)")
+                update_status("green", "সফল: " + stream_link + " (চ্যানেল পাওয়া গেছে: " + str(len(channels)) + " টি)")
 
             else:
-                update_status("red", f"ফেইলড (স্ট্যাটাস: {res.status_code}): {stream_link}")
+                update_status("red", "ফেইলড (স্ট্যাটাস: " + str(res.status_code) + "): " + stream_link)
                 updated_matches.append(match)
 
         except Exception as e:
-            update_status("red", f"ত্রুটি: {str(e)}")
+            update_status("red", "ত্রুটি: " + str(e))
             updated_matches.append(match)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
