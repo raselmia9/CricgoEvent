@@ -2,8 +2,8 @@
 🔵 data.json থেকে লিঙ্কগুলো লোড করা হচ্ছে...
 🔵 [1] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/england-vs-sri-lanka
 🟢 সফলভাবে প্রসেস হয়েছে: https://cricgo.pro/events/england-vs-sri-lanka
-🔵 [3] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/asian-games-2026
+🔵 [2] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/asian-games-2026
 🟢 সফলভাবে প্রসেস হয়েছে: https://cricgo.pro/events/asian-games-2026
-🔵 [5] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/australia-vs-south-africa
+🔵 [3] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/australia-vs-south-africa
 🟢 সফলভাবে প্রসেস হয়েছে: https://cricgo.pro/events/australia-vs-south-africa
-🟢 সকল ডাবল ডেটা রিমুভ করে ইউনিক ও সঠিক ডেটা data.json ফাইলে সেভ করা হয়েছে!
+🟢 সকল ভুল সংশোধন করে সঠিক লোগো ও মাল্টি-লিংকসহ data.json ফাইলে সেভ করা হয়েছে!

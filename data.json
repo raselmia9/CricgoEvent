@@ -6,16 +6,39 @@
         "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
         "team1Title": "England",
         "team2Title": "Sri Lanka",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willowextra"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=ten1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=crich2"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=criclife1"
+            }
+        ],
         "streamLink": "https://cricgo.pro/events/england-vs-sri-lanka",
         "isHot": true
     },
     {
-        "eventTitle": "ASIAN GAMES",
+        "eventTitle": "ASIAN GAMES 2026",
         "matchTime": "2026-09-24 06:00:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team1Logo": "/assets/logo.png",
+        "team2Logo": "/assets/logo.png",
         "team1Title": "",
         "team2Title": "",
+        "streamLinks": [],
         "streamLink": "https://cricgo.pro/events/asian-games-2026",
         "isHot": true
     },
@@ -26,6 +49,7 @@
         "team2Logo": "https://cdn.cricgo.pro/team/south-africa/logo.webp",
         "team1Title": "Australia",
         "team2Title": "South Africa",
+        "streamLinks": [],
         "streamLink": "https://cricgo.pro/events/australia-vs-south-africa",
         "isHot": true
     }
