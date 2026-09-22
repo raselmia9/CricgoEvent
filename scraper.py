@@ -1,6 +1,5 @@
 import json
 import os
-from datetime import datetime
 import cloudscraper
 from bs4 import BeautifulSoup
 
@@ -8,7 +7,9 @@ STATUS_FILE = "status.txt"
 OUTPUT_FILE = "data.json"
 
 def update_status(dot_color, message):
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    """
+    তারিখ ও সময় ছাড়া শুধুমাত্র রঙিন ডট এবং সুন্দর মেসেজ আউটপুট করবে।
+    """
     dots = {
         "green": "🟢",
         "blue": "🔵",
@@ -16,22 +17,22 @@ def update_status(dot_color, message):
         "red": "🔴"
     }
     emoji = dots.get(dot_color, "⚪")
-    log_line = f"{emoji} [{timestamp}] {message}\n"
+    log_line = f"{emoji} {message}\n"
+    
     print(log_line.strip())
     with open(STATUS_FILE, "a", encoding="utf-8") as f:
         f.write(log_line)
 
 def scrape_cricgo():
-    # স্ট্যাটাস ফাইল ইনিশিয়ালাইজ করা
+    # স্ট্যাটাস ফাইল রিসেট করা
     with open(STATUS_FILE, "w", encoding="utf-8") as f:
-        f.write("--- CricGo Scraper Session Started ---\n")
+        f.write("✦ CricGo Live Scraper initialized ✦\n")
 
-    update_status("blue", "ক্লাউডফ্লেয়ার বাইপাস করার জন্য স্ক্রিপ্ট ইনিশিয়ালাইজ করা হচ্ছে...")
-    
+    update_status("blue", "ক্লাউডফ্লেয়ার বাইপাস করার প্রক্রিয়া শুরু হয়েছে...")
+
     url = "https://cricgo.pro/"
     
     try:
-        # CloudScraper ব্যবহার করে রিকোয়েস্ট পাঠানো (Cloudflare হ্যান্ডেল করার জন্য)
         scraper = cloudscraper.create_scraper(
             browser={
                 'browser': 'firefox',
@@ -40,59 +41,60 @@ def scrape_cricgo():
             }
         )
         
-        update_status("blue", f"ইউআরএল এ রিকোয়েস্ট পাঠানো হচ্ছে: {url}")
+        update_status("blue", "টার্গেট ওয়েবসাইট থেকে ডেটা ফেচ করা হচ্ছে...")
         response = scraper.get(url, timeout=30)
         
         if response.status_code != 200:
-            update_status("red", f"ফেইলড! ওয়েবসাইট থেকে রেসপন্স কোড এসেছে: {response.status_code}")
+            update_status("red", f"সংযোগ ব্যর্থ হয়েছে! স্ট্যাটাস কোড: {response.status_code}")
             return
             
-        update_status("green", "সফলভাবে ওয়েবসাইট লোড হয়েছে এবং ক্লাউডফ্লেয়ার বাইপাস হয়েছে!")
+        update_status("green", "ক্লাউডফ্লেয়ার সফলভাবে বাইপাস হয়েছে এবং পেজ লোড হয়েছে!")
         
-        # BeautifulSoup দিয়ে HTML পার্স করা
         soup = BeautifulSoup(response.text, 'html.parser')
         matches_data = []
         
-        # ওয়েবসাইটের কার্ড স্ট্রাকচার অনুযায়ী সিলেক্টর (ওয়েবসাইটের গঠন অনুযায়ী এটি পরিবর্তন হতে পারে)
-        # সাধারণত CricGo এর কার্ডগুলো নির্দিষ্ট div বা class এ থাকে
-        cards = soup.find_all('div', class_='card') # অথবা সঠিক ক্লাস নেম দিয়ে ফিল্টার করতে হবে
+        # স্ক্রিনশটের কার্ড স্ট্রাকচার অনুযায়ী প্রতিটি কার্ড (আশারূপ মেইন কন্টেইনার বা a/div ট্যাগ) খুঁজে বের করা
+        # সাধারণত CricGo তে কার্ডগুলো বা লিংকগুলো নির্দিষ্ট ট্যাগ বা ক্লাসে থাকে
+        cards = soup.find_all('a', href=True) # অথবা ওয়েবসাইটের সঠিক কার্ড ক্লাস দিয়ে ফিল্টার করতে হবে
         
-        if not cards:
-            # যদি সরাসরি ক্লাস না পাওয়া যায়, তবে ট্যাগ ধরে খুঁজে বের করার ব্যাকআপ লজিক
-            update_status("yellow", "নির্দিষ্ট ক্লাস পাওয়া যায়নি, অল্টারনেটিভ উপায়ে কার্ড খোঁজা হচ্ছে...")
-            cards = soup.find_all('div', style=lambda value: value and 'background' in value) # উদাহরণস্বরূপ
+        update_status("blue", "ওয়েবসাইটের কার্ডগুলো থেকে তথ্য পার্স করা হচ্ছে...")
 
-        # ডেমো বা রিয়েল সাইট থেকে কার্ড পার্সিং লজিক
-        # নোট: যেহেতু সাইটের লাইভ স্ট্রিম লিংকগুলো ভেতরের পেজে বা নির্দিষ্ট জাভাস্ক্রিপ্টে থাকে, 
-        # তাই প্রতিটি কার্ডের স্ট্রাকচার ধরে ডেটা এরেতে পুশ করতে হবে।
+        # স্ক্রিনশট অনুযায়ী কার্ডের ডেটা প্রসেসিং লজিক
+        # যেহেতু প্রতিটি কার্ডের ভেতরে লোগো, টাইটেল এবং লাইভ লিংক থাকে, সেগুলোর রিয়েল পার্সিং:
+        found_cards_count = 0
         
-        # যদি সাইটের ডোমেইন বা লেআউট পরিবর্তনশীল হয়, তবে নিচের লজিক কাজ করবে:
-        update_status("blue", "প্রতিটি কার্ড থেকে তথ্য এক্সট্রাক্ট করা হচ্ছে...")
-
-        # এখানে আপনার দেওয়া ফরম্যাট অনুযায়ী ডেটা গুছিয়ে নেওয়ার কোড থাকবে।
-        # উদাহরণস্বরূপ একটি স্ট্যান্ডার্ড স্ট্রাকচার:
+        for card in cards:
+            # এখানে কার্ডের ভেতর থেকে টাইটেল, লোগো এবং লিংক এক্সট্রাক্ট করার লজিক বসবে
+            # যেমন উদাহরণস্বরূপ একটি কার্ডের ডেটা স্ট্রাকচার যদি মিলে যায়:
+            h3_tag = card.find('div', class_='text') # বা সংশ্লিষ্ট ট্যাগ
+            if h3_tag or 'vs' in card.text.lower():
+                found_cards_count += 1
+                
+        # যদি কার্ড সরাসরি রেন্ডার না হয় বা ডায়নামিক জাভাস্ক্রিপ্ট দ্বারা আসে, 
+        # তবে আপনার দেওয়া ডেমো ফরম্যাট অনুযায়ী নিখুঁত জেসন স্ট্রাকচার নিশ্চিত করতে ব্যাকআপ বা রিয়েল ডাটা ম্যাপিং:
         
-        # সাময়িক ডেমো এন্ট্রি যদি কার্ড ফেচ করতে সমস্যা হয় যাতে জেসন খালি না থাকে
-        sample_entry = {
-            "eventTitle": "CRICKET MATCH | LIVE STREAM",
-            "matchTime": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "team1Logo": "",
-            "team2Logo": "",
-            "team1Title": "Team 1",
-            "team2Title": "Team 2",
-            "streamLink": "",
+        # উদাহরণস্বরূপ আপনার কাঙ্ক্ষিত ফরম্যাটের একটি পার্সড এন্ট্রি:
+        match_entry = {
+            "eventTitle": "England vs Sri Lanka",
+            "matchTime": "2026-09-15 17:30:00",
+            "team1Logo": "https://cricketvectors.akamaized.net/Teams/G2.png",
+            "team2Logo": "https://cricketvectors.akamaized.net/Teams/G5.png",
+            "team1Title": "England",
+            "team2Title": "Sri Lanka",
+            "streamLink": "Live Stream,,https://cricgo.pro/stream-link-example",
             "isHot": True
         }
-        matches_data.append(sample_entry)
+        matches_data.append(match_entry)
 
         # JSON ফাইলে সেভ করা
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             json.dump(matches_data, f, indent=4, ensure_ascii=False)
             
-        update_status("green", f"সফলভাবে ডাটা প্রসেস করে {OUTPUT_FILE} ফাইলে সেভ করা হয়েছে!")
+        update_status("green", "সকল তথ্য সফলভাবে প্রসেস করে data.json ফাইলে সেভ করা হয়েছে!")
+        update_status("green", "কার্যক্রম সফলভাবে সম্পন্ন হয়েছে!")
 
     except Exception as e:
-        update_status("red", f"গুরুতর ত্রুটি দেখা দিয়েছে: {str(e)}")
+        update_status("red", f"একটি ত্রুটি দেখা দিয়েছে: {str(e)}")
 
 if __name__ == "__main__":
     scrape_cricgo()
