@@ -56,16 +56,14 @@ def scrape_match_details():
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
     }
 
-    seen_links = set()
-    unique_updated_matches = []
+    updated_matches = []
 
     for index, match in enumerate(matches, start=1):
         stream_link = match.get("streamLink", "")
-        if not stream_link or stream_link in seen_links:
+        if not stream_link:
             continue
 
-        seen_links.add(stream_link)
-        update_status("blue", f"[{index}] পেজ ভিজিট করা হচ্ছে: {stream_link}")
+        update_status("blue", f"[{index}/{len(matches)}] পেজ ভিজিট করা হচ্ছে: {stream_link}")
 
         try:
             res = requests.get(stream_link, headers=headers, timeout=15)
@@ -75,53 +73,53 @@ def scrape_match_details():
                 # ১. ইভেন্ট টাইটেল সংগ্রহ
                 event_title = "INTERNATIONAL CRICKET"
                 small_heading = soup.find('div', class_='text-sm')
-                if small_heading:
-                    txt = small_heading.get_text(strip=True)
-                    if txt:
-                        event_title = txt
+                if small_heading and small_heading.get_text(strip=True):
+                    event_title = small_heading.get_text(strip=True)
 
-                # ২. লোগো এবং টিম নাম সুনির্দিষ্টভাবে সংগ্রহ
+                # ২. লোগো নিখুঁতভাবে সংগ্রহ (পূর্ণাঙ্গ লিংক সহ)
+                images = soup.find_all('img')
+                logos = []
+                for img in images:
+                    src = img.get('src', '')
+                    if src:
+                        # যদি লিংক রিলেটিভ হয় তবে ডোমেন যুক্ত করে পূর্ণাঙ্গ করা
+                        if src.startswith('/'):
+                            src = "https://cricgo.pro" + src
+                        elif not src.startswith('http'):
+                            src = "https://cricgo.pro/" + src
+                        
+                        if src not in logos:
+                            logos.append(src)
+
                 logo1, logo2 = "", ""
                 team1_title, team2_title = "", ""
 
-                # পেজের মূল লোগো ইমেজগুলো টার্গেট করা (যেগুলো সাধারণত টিম বা ইভেন্ট লোগো কন্টেইনারে থাকে)
-                all_imgs = soup.find_all('img')
-                valid_imgs = []
-                for img in all_imgs:
-                    src = img.get('src', '')
-                    # লোগো বা সিডিএন পাথ ফিল্টার করা
-                    if src and ('cdn.' in src or 'team' in src or 'logo' in src or 'event' in src):
-                        if src not in valid_imgs:
-                            valid_imgs.append(src)
-
-                # যদি এটি এশিয়ান গেমস বা স্পেশাল ইভেন্ট হয় (যেখানে দুটি আলাদা দেশের লোগো নেই)
+                # মাঝখানের এশিয়ান গেমস বা স্পেশাল ইভেন্টের লোগো হ্যান্ডলিং
                 if "asian-games" in stream_link:
                     event_title = "ASIAN GAMES 2026"
+                    valid_logo = ""
+                    for l in logos:
+                        if 'team' in l or 'logo' in l or 'cdn' in l:
+                            valid_logo = l
+                            break
+                    if not valid_logo and logos:
+                        valid_logo = logos[0]
+                    
+                    logo1 = valid_logo
+                    logo2 = valid_logo
                     team1_title = ""
                     team2_title = ""
-                    # এশিয়ান গেমসের নিজস্ব লোগোটি খুঁজে বের করা
-                    asian_logo = ""
-                    for img_url in valid_imgs:
-                        if 'asian' in img_url.lower() or 'logo' in img_url.lower() or len(valid_imgs) == 1:
-                            asian_logo = img_url
-                            break
-                    if not asian_logo and valid_imgs:
-                        asian_logo = valid_imgs[0]
-                    
-                    logo1 = asian_logo
-                    logo2 = asian_logo
                 else:
-                    # সাধারণ দ্বিপক্ষীয় ম্যাচের জন্য দুটি আলাদা লোগো আলাদা করা
-                    team_logos = [img for img in valid_imgs if 'team' in img]
+                    team_logos = [l for l in logos if 'team' in l]
                     if len(team_logos) >= 2:
                         logo1 = team_logos[0]
                         logo2 = team_logos[1]
-                    elif len(valid_imgs) >= 2:
-                        logo1 = valid_imgs[0]
-                        logo2 = valid_imgs[1]
-                    elif len(valid_imgs) == 1:
-                        logo1 = valid_imgs[0]
-                        logo2 = valid_imgs[0]
+                    elif len(logos) >= 2:
+                        logo1 = logos[0]
+                        logo2 = logos[1]
+                    elif len(logos) == 1:
+                        logo1 = logos[0]
+                        logo2 = logos[0]
 
                     # স্লগ থেকে টিম নাম বের করা
                     slug = stream_link.split("/events/")[-1]
@@ -130,23 +128,7 @@ def scrape_match_details():
                         team1_title = parts[0].replace("-", " ").title()
                         team2_title = parts[1].replace("-", " ").title()
 
-                # ৩. মাল্টি-চ্যানেল লিংক সংগ্রহ
-                channels = []
-                channel_rows = soup.find_all('a', href=True)
-                for ch in channel_rows:
-                    ch_text = ch.get_text(separator=" ", strip=True)
-                    ch_href = ch.get('href', '')
-                    if "Watch" in ch_text or "watch" in ch_text.lower():
-                        channel_name = ch_text.replace("Watch", "").replace("↗", "").strip()
-                        if not channel_name:
-                            channel_name = "Stream Link"
-                        
-                        channels.append({
-                            "channelName": channel_name,
-                            "channelLink": ch_href if ch_href.startswith("http") else "https://cricgo.pro" + ch_href
-                        })
-
-                # ৪. সময় এক্সট্রাক্ট করা
+                # ৩. সময় এক্সট্রাক্ট করা
                 raw_time_str = ""
                 page_text = soup.get_text(separator=" ", strip=True)
                 if "UTC" in page_text:
@@ -166,24 +148,25 @@ def scrape_match_details():
                     "team2Logo": logo2,
                     "team1Title": team1_title,
                     "team2Title": team2_title,
-                    "streamLinks": channels,
                     "streamLink": stream_link,
                     "isHot": is_live
                 }
 
-                unique_updated_matches.append(match_entry)
-                update_status("green", f"সফলভাবে প্রসেস হয়েছে: {stream_link}")
+                updated_matches.append(match_entry)
+                update_status("green", f"সফল: {stream_link}")
 
             else:
                 update_status("red", f"ফেইলড (স্ট্যাটাস: {res.status_code}): {stream_link}")
+                updated_matches.append(match)
 
         except Exception as e:
             update_status("red", f"ত্রুটি: {str(e)}")
+            updated_matches.append(match)
 
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-        json.dump(unique_updated_matches, f, indent=4, ensure_ascii=False)
+        json.dump(updated_matches, f, indent=4, ensure_ascii=False)
 
-    update_status("green", "এশিয়ান গেমসসহ সকল লোগো এবং লিংক সফলভাবে আপডেট করা হয়েছে!")
+    update_status("green", "সকল ডেটা এবং লোগোর লিংক পূর্ণাঙ্গভাবে প্রসেস করা হয়েছে!")
 
 if __name__ == "__main__":
     scrape_match_details()
