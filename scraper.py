@@ -21,9 +21,9 @@ def update_status(dot_color, message):
 
 def scrape_cricgo():
     with open(STATUS_FILE, "w", encoding="utf-8") as f:
-        f.write("✦ CricGo Real Data Scraper Initialized ✦\n")
+        f.write("✦ CricGo Match Cards Scraper Initialized ✦\n")
 
-    update_status("blue", "হোমপেজ থেকে রিয়েল ডাটা ফেচ করা শুরু হয়েছে...")
+    update_status("blue", "হোমপেজ থেকে রিয়েল ম্যাচ কার্ড ডাটা ফেচ করা শুরু হয়েছে...")
 
     url = "https://cricgo.pro/"
     headers = {
@@ -40,46 +40,72 @@ def scrape_cricgo():
             
             soup = BeautifulSoup(response.text, 'html.parser')
             
-            # ওয়েবসাইটের ম্যাচ কার্ড বা কন্টেইনারগুলো খুঁজে বের করার লজিক
-            # আপনার সাইটের নির্দিষ্ট HTML ট্যাগ বা ক্লাস অনুযায়ী এটি পরিবর্তন করতে হতে পারে
-            cards = soup.find_all('div', class_='card') # অথবা সঠিক এলিমেন্ট/ক্লাস নাম দিন
+            # সাইডবার মেনু বা ক্যাটাগরি বাদ দিয়ে মূল ম্যাচ কার্ডগুলো খোঁজার জন্য 
+            # সাধারণ ম্যাচ কার্ডের ক্লাস বা কন্টেইনার (যেমন: match-card, match-box অথবা সরাসরি লিঙ্কের স্ট্রাকচার) টার্গেট করা
+            # সাধারণত ম্যাচ কার্ডগুলোতে টিম ও সময়ের তথ্য থাকে
             
-            if not cards:
-                update_status("yellow", "নির্দিষ্ট ক্লাস না পাওয়ায় সকল লিঙ্ক বা ব্লক চেক করা হচ্ছে...")
-                cards = soup.find_all('a', href=True)
+            # এখানে আপনার সাইটের ম্যাচ কার্ডগুলোর আসল ক্লাস বা কন্টেইনার ট্যাগ দিন (যেমন: 'match-card', 'card', ইত্যাদি)
+            # নিচে একটি আদর্শ ম্যাচ কার্ড স্ট্রাকচার ফিল্টার করার লজিক দেওয়া হলো যা সাইডবার বাদ দেবে:
+            cards = []
+            
+            # সম্ভাব্য ম্যাচ কার্ড বা ম্যাচ আইটেম কন্টেইনার খুঁজছি
+            potential_cards = soup.find_all('div', class_=['match-card', 'card', 'match-item', 'live-match'])
+            
+            if not potential_cards:
+                # যদি নির্দিষ্ট ক্লাস না পাওয়া যায়, তবে যে সমস্ত লিংকের মধ্যে একাধিক টিম লোগো বা 'vs' / সময় রয়েছে সেগুলোকে ফিল্টার করা হবে
+                all_links = soup.find_all('a', href=True)
+                for link in all_links:
+                    href = link.get('href', '')
+                    # সাইডবার মেনুর লিংক যেমন /cricket বা /leagues বাদ দিয়ে শুধুমাত্র ম্যাচ বা স্ট্রিম লিংক ফিল্টার করা
+                    if '/match/' in href or '/stream/' in href or len(link.find_all('img')) >= 2:
+                        cards.append(link)
+            else:
+                cards = potential_cards
+
+            update_status("blue", f"পাওয়া গেছে মোট {len(cards)} সম্ভাব্য কার্ড, ডেটা প্রসেস করা হচ্ছে...")
 
             for card in cards:
-                card_text = card.get_text(strip=True)
+                # কার্ড থেকে লোগোগুলো সংগ্রহ করা
+                images = card.find_all('img')
+                logo1 = images[0]['src'] if len(images) > 0 else ""
+                logo2 = images[1]['src'] if len(images) > 1 else ""
                 
-                # উদাহরণস্বরূপ: যে কার্ডগুলোতে লাইভ বা ম্যাচ সম্পর্কিত তথ্য আছে
-                if card_text and len(card_text) > 3:
-                    images = card.find_all('img')
-                    logo1 = images[0]['src'] if len(images) > 0 else ""
-                    logo2 = images[1]['src'] if len(images) > 1 else ""
-                    
+                # টিম বা ইভেন্টের শিরোনাম বের করা
+                # সাইডবার বা ক্যাটাগরি টেক্সট বাদ দেওয়ার জন্য ন্যূনতম শর্ত রাখা হলো
+                title_elem = card.find(['h3', 'h4', 'span', 'div'], class_=['title', 'match-title', 'team-name'])
+                event_title = title_elem.get_text(strip=True) if title_elem else card.get_text(strip=True)
+                
+                # ম্যাচ টাইম বা স্ট্যাটাস (লাইভ বা টাইম) বের করা
+                time_elem = card.find(['span', 'div'], class_=['time', 'match-time', 'badge'])
+                match_time = time_elem.get_text(strip=True) if time_elem else ""
+                
+                stream_link = card.get('href', '') if card.name == 'a' else (card.find('a', href=True).get('href', '') if card.find('a', href=True) else "")
+
+                # যদি এটি সাইডবার মেনু না হয়ে আসল ম্যাচ কার্ড হয় (যেমন লোগো আছে অথবা লিংকে নির্দিষ্ট প্যাটার্ন আছে)
+                if logo1 or "vs" in event_title.lower() or "/match/" in stream_link:
                     match_entry = {
-                        "eventTitle": card_text[:100],
-                        "matchTime": "",
+                        "eventTitle": event_title[:100],
+                        "matchTime": match_time,
                         "team1Logo": logo1,
                         "team2Logo": logo2,
-                        "team1Title": "",
+                        "team1Title": "", # প্রয়োজন অনুযায়ী আলাদা করতে পারেন
                         "team2Title": "",
-                        "streamLink": card.get('href', ''),
-                        "isHot": "live" in card_text.lower()
+                        "streamLink": stream_link,
+                        "isHot": "live" in card.get_text().lower() or "live" in stream_link.lower()
                     }
-                    if match_entry not in matches_data:
+                    if match_entry not in matches_data and stream_link:
                         matches_data.append(match_entry)
 
             if not matches_data:
-                update_status("yellow", "সতর্কতা: কোনো ম্যাচ ডাটা ফিল্টার করা যায়নি। অনুগ্রহ করে সাইটের সঠিক এইচটিএমএল ক্লাস বা ট্যাগ দিন।")
+                update_status("yellow", "সতর্কতা: সঠিক ফিল্টারে কোনো ম্যাচ কার্ড পাওয়া যায়নি। অনুগ্রহ করে ম্যাচ কার্ডের নির্দিষ্ট HTML ক্লাস নেম দিন।")
             else:
-                update_status("green", f"মোট {len(matches_data)} টি রিয়েল ম্যাচ ডাটা পাওয়া গেছে!")
+                update_status("green", f"সফলভাবে {len(matches_data)} টি রিয়েল ম্যাচ কার্ড এক্সট্রাক্ট করা হয়েছে!")
 
             # JSON ফাইলে সেভ করা
             with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
                 json.dump(matches_data, f, indent=4, ensure_ascii=False)
                 
-            update_status("green", "সকল রিয়েল ডাটা সফলভাবে data.json ফাইলে সেভ করা হয়েছে!")
+            update_status("green", "সকল ম্যাচ কার্ডের রিয়েল ডাটা data.json ফাইলে সেভ করা হয়েছে!")
 
         else:
             update_status("red", f"সার্ভার এরর: স্ট্যাটাস কোড {response.status_code}")
