@@ -126,16 +126,16 @@ def scrape_match_details():
                         team1_title = parts[0].replace("-", " ").title()
                         team2_title = parts[1].replace("-", " ").title()
 
-                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ (Regex ফিল্টার সহ)
+                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ
                 channels = []
                 channel_rows = soup.find_all('a', href=True)
                 
                 for ch in channel_rows:
                     ch_text = ch.get_text(separator=" ", strip=True)
                     if "watch" in ch_text.lower():
-                        # 'watch' শব্দের আগের অংশটুকু আলাদা করা
-                        name_part = re.split(r'watch', ch_text, flags=regex_flag := re.IGNORECASE)[0]
-                        # টিকমার্ক, তীরচিহ্ন ও অতিরিক্ত প্রতীকগুলো পরিষ্কার করা
+                        # সঠিক নিয়মে 'watch' এর আগের অংশটুকু আলাদা করা
+                        name_part = re.split(r'watch', ch_text, flags=re.IGNORECASE)[0]
+                        # অতিরিক্ত প্রতীকগুলো পরিষ্কার করা
                         name_part = re.sub(r'[✓↗\|\-\—\–]+', '', name_part).strip()
                         
                         if not name_part or len(name_part) < 2:
