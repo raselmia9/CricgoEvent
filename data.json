@@ -1,11 +1,32 @@
 [
     {
-        "streamLink": "/events/england-vs-sri-lanka"
+        "eventTitle": "",
+        "matchTime": "",
+        "team1Logo": "",
+        "team2Logo": "",
+        "team1Title": "",
+        "team2Title": "",
+        "streamLink": "https://cricgo.pro/events/england-vs-sri-lanka",
+        "isHot": true
     },
     {
-        "streamLink": "/events/asian-games-2026"
+        "eventTitle": "",
+        "matchTime": "",
+        "team1Logo": "",
+        "team2Logo": "",
+        "team1Title": "",
+        "team2Title": "",
+        "streamLink": "https://cricgo.pro/events/asian-games-2026",
+        "isHot": true
     },
     {
-        "streamLink": "/events/australia-vs-south-africa"
+        "eventTitle": "",
+        "matchTime": "",
+        "team1Logo": "",
+        "team2Logo": "",
+        "team1Title": "",
+        "team2Title": "",
+        "streamLink": "https://cricgo.pro/events/australia-vs-south-africa",
+        "isHot": true
     }
 ]
