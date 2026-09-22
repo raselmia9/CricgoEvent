@@ -126,27 +126,29 @@ def scrape_match_details():
                         team1_title = parts[0].replace("-", " ").title()
                         team2_title = parts[1].replace("-", " ").title()
 
-                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ (অপ্রয়োজনীয় প্রতীক ফিল্টার সহ)
+                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ (নিরাপদ ক্লিনিং সহ)
                 channels = []
-                channel_rows = soup.find_all('a', href=True)
-                for ch in channel_rows:
-                    ch_text = ch.get_text(separator=" ", strip=True)
-                    ch_href = ch.get('href', '')
+                for a_tag in soup.find_all('a', href=True):
+                    ch_text = a_tag.get_text(separator=" ", strip=True)
                     if "watch" in ch_text.lower():
-                        # 'watch' এর আগের অংশটুকু আলাদা করা
-                        parts = re.split(r'watch', ch_text, flags=re.IGNORECASE)
-                        channel_name = parts[0].strip()
+                        # 'watch' বা তীরচিহ্ন বাদ দিয়ে নাম আলাদা করা
+                        name = ch_text.replace("Watch", "").replace("watch", "").replace("↗", "").strip()
+                        # সব ধরনের লাঠি বা হাইফেন পরিষ্কার করা
+                        name = re.sub(r'[\|\-\—\–]+', '', name).strip()
                         
-                        # লাঠি, হাইফেন বা তীরচিহ্ন পরিষ্কার করা
-                        channel_name = channel_name.strip('|- ↗')
+                        if not name:
+                            name = "Stream Link"
                         
-                        if not channel_name:
-                            channel_name = "Stream Link"
+                        ch_href = a_tag.get('href', '')
+                        full_ch_link = ch_href if ch_href.startswith("http") else "https://cricgo.pro" + ch_href
                         
-                        channels.append({
-                            "channelName": channel_name,
-                            "channelLink": ch_href if ch_href.startswith("http") else "https://cricgo.pro" + ch_href
-                        })
+                        channel_obj = {
+                            "channelName": name,
+                            "channelLink": full_ch_link
+                        }
+                        
+                        if channel_obj not in channels:
+                            channels.append(channel_obj)
 
                 # ৪. সময় এক্সট্রাক্ট করা
                 raw_time_str = ""
@@ -174,7 +176,7 @@ def scrape_match_details():
                 }
 
                 updated_matches.append(match_entry)
-                update_status("green", f"সফল: {stream_link}")
+                update_status("green", f"সফল: {stream_link} (চ্যানেল পাওয়া গেছে: {len(channels)} টি)")
 
             else:
                 update_status("red", f"ফেইলড (স্ট্যাটাস: {res.status_code}): {stream_link}")
@@ -187,7 +189,7 @@ def scrape_match_details():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(updated_matches, f, indent=4, ensure_ascii=False)
 
-    update_status("green", "চ্যানেলের সঠিক নাম ও মাল্টি-লিংকসহ সকল ডেটা আপডেট করা হয়েছে!")
+    update_status("green", "সকল ডেটা, লোগো এবং চ্যানেলের সঠিক নাম সফলভাবে আপডেট করা হয়েছে!")
 
 if __name__ == "__main__":
     scrape_match_details()
