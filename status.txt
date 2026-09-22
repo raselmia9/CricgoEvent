@@ -1,9 +1,9 @@
 ✦ Phase 2: Detailed Scraper Initialized ✦
 🔵 data.json থেকে লিঙ্কগুলো লোড করা হচ্ছে...
-🔵 পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/england-vs-sri-lanka
+🔵 [1/3] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/england-vs-sri-lanka
 🟢 সফল: https://cricgo.pro/events/england-vs-sri-lanka (চ্যানেল পাওয়া গেছে: 5 টি)
-🔵 পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/asian-games-2026
+🔵 [2/3] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/asian-games-2026
 🟢 সফল: https://cricgo.pro/events/asian-games-2026 (চ্যানেল পাওয়া গেছে: 0 টি)
-🔵 পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/australia-vs-south-africa
+🔵 [3/3] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/australia-vs-south-africa
 🟢 সফল: https://cricgo.pro/events/australia-vs-south-africa (চ্যানেল পাওয়া গেছে: 0 টি)
 🟢 সকল ডেটা, লোগো এবং চ্যানেলের সঠিক নাম সফলভাবে আপডেট করা হয়েছে!
