@@ -126,19 +126,19 @@ def scrape_match_details():
                         team1_title = parts[0].replace("-", " ").title()
                         team2_title = parts[1].replace("-", " ").title()
 
-                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ (স্ক্রিনশটের গঠন অনুযায়ী)
+                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ (Regex ফিল্টার সহ)
                 channels = []
                 channel_rows = soup.find_all('a', href=True)
                 
                 for ch in channel_rows:
                     ch_text = ch.get_text(separator=" ", strip=True)
-                    # যে রো বা লিঙ্কে "watch" লেখা আছে সেগুলোকে ফিল্টার করা
                     if "watch" in ch_text.lower():
-                        # "Watch" এর বাম পাশের অংশটুকু আলাদা করে শুধু চ্যানেলের নাম রাখা[span_1](start_span)[span_1](end_span)
-                        name_part = ch_text.split("Watch")[0].split("watch")[0].strip()
-                        name_part = name_part.replace("✓", "").strip()
+                        # 'watch' শব্দের আগের অংশটুকু আলাদা করা
+                        name_part = re.split(r'watch', ch_text, flags=regex_flag := re.IGNORECASE)[0]
+                        # টিকমার্ক, তীরচিহ্ন ও অতিরিক্ত প্রতীকগুলো পরিষ্কার করা
+                        name_part = re.sub(r'[✓↗\|\-\—\–]+', '', name_part).strip()
                         
-                        if not name_part:
+                        if not name_part or len(name_part) < 2:
                             name_part = "Stream Link"
                         
                         ch_href = ch.get('href', '')
