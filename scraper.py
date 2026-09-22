@@ -1,5 +1,6 @@
 import json
 import os
+import re
 from datetime import datetime, timezone, timedelta
 import requests
 from bs4 import BeautifulSoup
@@ -125,14 +126,20 @@ def scrape_match_details():
                         team1_title = parts[0].replace("-", " ").title()
                         team2_title = parts[1].replace("-", " ").title()
 
-                # ৩. মাল্টি-চ্যানেল লিংক এবং নাম সংগ্রহ (আগের মতো নিখুঁতভাবে)
+                # ৩. চ্যানেলের সঠিক নাম এবং মাল্টি-লিংক সংগ্রহ (অপ্রয়োজনীয় প্রতীক ফিল্টার সহ)
                 channels = []
                 channel_rows = soup.find_all('a', href=True)
                 for ch in channel_rows:
                     ch_text = ch.get_text(separator=" ", strip=True)
                     ch_href = ch.get('href', '')
-                    if "Watch" in ch_text or "watch" in ch_text.lower():
-                        channel_name = ch_text.replace("Watch", "").replace("↗", "").strip()
+                    if "watch" in ch_text.lower():
+                        # 'watch' এর আগের অংশটুকু আলাদা করা
+                        parts = re.split(r'watch', ch_text, flags=re.IGNORECASE)
+                        channel_name = parts[0].strip()
+                        
+                        # লাঠি, হাইফেন বা তীরচিহ্ন পরিষ্কার করা
+                        channel_name = channel_name.strip('|- ↗')
+                        
                         if not channel_name:
                             channel_name = "Stream Link"
                         
@@ -161,7 +168,7 @@ def scrape_match_details():
                     "team2Logo": logo2,
                     "team1Title": team1_title,
                     "team2Title": team2_title,
-                    "streamLinks": channels, # চ্যানেলের নাম ও লিংকসহ মাল্টি-লিংক অ্যারে
+                    "streamLinks": channels,
                     "streamLink": stream_link,
                     "isHot": is_live
                 }
@@ -180,7 +187,7 @@ def scrape_match_details():
     with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
         json.dump(updated_matches, f, indent=4, ensure_ascii=False)
 
-    update_status("green", "মাল্টি-লিংক এবং লোগোসহ সকল ডেটা সফলভাবে আপডেট করা হয়েছে!")
+    update_status("green", "চ্যানেলের সঠিক নাম ও মাল্টি-লিংকসহ সকল ডেটা আপডেট করা হয়েছে!")
 
 if __name__ == "__main__":
     scrape_match_details()
