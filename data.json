@@ -10,43 +10,13 @@
         "isHot": true
     },
     {
-        "eventTitle": "INTERNATIONAL CRICKET",
-        "matchTime": "2026-09-15 23:30:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
-        "team1Title": "England",
-        "team2Title": "Sri Lanka",
-        "streamLink": "https://cricgo.pro/events/england-vs-sri-lanka",
-        "isHot": true
-    },
-    {
-        "eventTitle": "INTERNATIONAL CRICKET",
+        "eventTitle": "ASIAN GAMES",
         "matchTime": "2026-09-24 06:00:00",
         "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
         "team1Title": "",
         "team2Title": "",
         "streamLink": "https://cricgo.pro/events/asian-games-2026",
-        "isHot": true
-    },
-    {
-        "eventTitle": "INTERNATIONAL CRICKET",
-        "matchTime": "2026-09-24 06:00:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
-        "team1Title": "",
-        "team2Title": "",
-        "streamLink": "https://cricgo.pro/events/asian-games-2026",
-        "isHot": true
-    },
-    {
-        "eventTitle": "INTERNATIONAL CRICKET",
-        "matchTime": "2026-09-24 14:00:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/australia/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/south-africa/logo.webp",
-        "team1Title": "Australia",
-        "team2Title": "South Africa",
-        "streamLink": "https://cricgo.pro/events/australia-vs-south-africa",
         "isHot": true
     },
     {
