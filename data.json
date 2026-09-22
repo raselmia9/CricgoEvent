@@ -1,5 +1,15 @@
 [
     {
+        "eventTitle": "Cricket",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/category/cricket/logo.webp",
+        "team2Logo": "",
+        "team1Title": "Cricket",
+        "team2Title": "",
+        "streamLink": "/cricket",
+        "isHot": false
+    },
+    {
         "eventTitle": "vs England vs Sri Lanka England vs Sri Lanka Live",
         "matchTime": "2026-09-15 17:30:00 UTC",
         "team1Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
@@ -28,5 +38,115 @@
         "team2Title": "South Africa Australia vs South Africa Live",
         "streamLink": "/events/australia-vs-south-africa",
         "isHot": true
+    },
+    {
+        "eventTitle": "Pakistan",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "",
+        "team1Title": "Pakistan",
+        "team2Title": "",
+        "streamLink": "/teams/pakistan",
+        "isHot": false
+    },
+    {
+        "eventTitle": "England",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
+        "team2Logo": "",
+        "team1Title": "England",
+        "team2Title": "",
+        "streamLink": "/teams/england",
+        "isHot": false
+    },
+    {
+        "eventTitle": "Australia",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/australia/logo.webp",
+        "team2Logo": "",
+        "team1Title": "Australia",
+        "team2Title": "",
+        "streamLink": "/teams/australia",
+        "isHot": false
+    },
+    {
+        "eventTitle": "South Africa",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/south-africa/logo.webp",
+        "team2Logo": "",
+        "team1Title": "South Africa",
+        "team2Title": "",
+        "streamLink": "/teams/south-africa",
+        "isHot": false
+    },
+    {
+        "eventTitle": "New Zealand",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/new-zealand/logo.webp",
+        "team2Logo": "",
+        "team1Title": "New Zealand",
+        "team2Title": "",
+        "streamLink": "/teams/new-zealand",
+        "isHot": false
+    },
+    {
+        "eventTitle": "West Indies",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/west-indies/logo.webp",
+        "team2Logo": "",
+        "team1Title": "West Indies",
+        "team2Title": "",
+        "streamLink": "/teams/west-indies",
+        "isHot": false
+    },
+    {
+        "eventTitle": "Sri Lanka",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
+        "team2Logo": "",
+        "team1Title": "Sri Lanka",
+        "team2Title": "",
+        "streamLink": "/teams/sri-lanka",
+        "isHot": false
+    },
+    {
+        "eventTitle": "Bangladesh",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/bangladesh/logo.webp",
+        "team2Logo": "",
+        "team1Title": "Bangladesh",
+        "team2Title": "",
+        "streamLink": "/teams/bangladesh",
+        "isHot": false
+    },
+    {
+        "eventTitle": "Zimbabwe",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/zimbabwe/logo.webp",
+        "team2Logo": "",
+        "team1Title": "Zimbabwe",
+        "team2Title": "",
+        "streamLink": "/teams/zimbabwe",
+        "isHot": false
+    },
+    {
+        "eventTitle": "Ireland",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/ireland/logo.webp",
+        "team2Logo": "",
+        "team1Title": "Ireland",
+        "team2Title": "",
+        "streamLink": "/teams/ireland",
+        "isHot": false
+    },
+    {
+        "eventTitle": "Afghanistan",
+        "matchTime": "",
+        "team1Logo": "https://cdn.cricgo.pro/team/afghanistan/logo.webp",
+        "team2Logo": "",
+        "team1Title": "Afghanistan",
+        "team2Title": "",
+        "streamLink": "/teams/afghanistan",
+        "isHot": false
     }
 ]
