@@ -70,7 +70,32 @@
         "team2Logo": "https://cdn.cricgo.pro/team/south-africa/logo.webp",
         "team1Title": "Australia",
         "team2Title": "South Africa",
-        "streamLinks": [],
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willowhd"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=asports"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=fox501"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=crich2"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=cricgo5"
+            }
+        ],
         "streamLink": "https://cricgo.pro/events/australia-vs-south-africa",
         "isHot": true
     }
