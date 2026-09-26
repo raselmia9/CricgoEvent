@@ -1,12 +1,16 @@
 ✦ Scraper Initialized ✦
 🔵 হোমপেজ থেকে লাইভ ম্যাচ ও ইভেন্ট লিঙ্ক সংগ্রহ করা হচ্ছে...
-🟢 মোট 4 টি লিঙ্ক হোমপেজ থেকে সংগ্রহ করা হয়েছে।
-🔵 [1/4] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/england-vs-sri-lanka
+🟢 মোট 6 টি লিঙ্ক হোমপেজ থেকে সংগ্রহ করা হয়েছে।
+🔵 [1/6] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/england-vs-sri-lanka
 🟢 সফল: https://cricgo.pro/events/england-vs-sri-lanka (চ্যানেল পাওয়া গেছে: 5 টি)
-🔵 [2/4] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/asian-games-2026
+🔵 [2/6] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/asian-games-2026
 🟢 সফল: https://cricgo.pro/events/asian-games-2026 (চ্যানেল পাওয়া গেছে: 5 টি)
-🔵 [3/4] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/australia-vs-south-africa
+🔵 [3/6] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/australia-vs-south-africa
 🟢 সফল: https://cricgo.pro/events/australia-vs-south-africa (চ্যানেল পাওয়া গেছে: 6 টি)
-🔵 [4/4] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/india-vs-west-indies
+🔵 [4/6] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/india-vs-west-indies
 🟢 সফল: https://cricgo.pro/events/india-vs-west-indies (চ্যানেল পাওয়া গেছে: 5 টি)
+🔵 [5/6] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/pakistan-vs-hong-kong
+🟢 সফল: https://cricgo.pro/events/pakistan-vs-hong-kong (চ্যানেল পাওয়া গেছে: 4 টি)
+🔵 [6/6] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/india-vs-afghanistan
+🟢 সফল: https://cricgo.pro/events/india-vs-afghanistan (চ্যানেল পাওয়া গেছে: 5 টি)
 🟢 সব কাজ সফলভাবে সম্পন্ন হয়েছে এবং data.json আপডেট করা হয়েছে!

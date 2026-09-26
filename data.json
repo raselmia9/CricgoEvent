@@ -130,5 +130,65 @@
         ],
         "streamLink": "https://cricgo.pro/events/india-vs-west-indies",
         "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-09-28 06:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/hong-kong/logo.webp",
+        "team1Title": "Pakistan",
+        "team2Title": "Hong Kong",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=ptvsp"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=ten1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=cricgo1"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/pakistan-vs-hong-kong",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-09-28 11:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/afghanistan/logo.webp",
+        "team1Title": "India",
+        "team2Title": "Afghanistan",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willowhd"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=astrocric"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=ten1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=cricgo1"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/india-vs-afghanistan",
+        "isHot": true
     }
 ]
