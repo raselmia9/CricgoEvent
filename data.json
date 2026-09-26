@@ -98,5 +98,37 @@
         ],
         "streamLink": "https://cricgo.pro/events/australia-vs-south-africa",
         "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-09-27 14:30:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/west-indies/logo.webp",
+        "team1Title": "India",
+        "team2Title": "West Indies",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=starsp3"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=starsp2"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willowhd"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=astrocric"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/india-vs-west-indies",
+        "isHot": true
     }
 ]
