@@ -1,5 +1,37 @@
 [
     {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-09-15 23:30:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
+        "team1Title": "England",
+        "team2Title": "Sri Lanka",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willowextra"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=ten1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=crich2"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=criclife1"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/england-vs-sri-lanka",
+        "isHot": true
+    },
+    {
         "eventTitle": "ASIAN GAMES 2026",
         "matchTime": "2026-09-24 06:00:00",
         "team1Logo": "https://cricgo.pro/assets/logo.png",
@@ -97,6 +129,34 @@
             }
         ],
         "streamLink": "https://cricgo.pro/events/india-vs-west-indies",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-09-28 06:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/hong-kong/logo.webp",
+        "team1Title": "Pakistan",
+        "team2Title": "Hong Kong",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=ptvsp"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=ten1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://cricgo.cc/player.php?id=cricgo1"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/pakistan-vs-hong-kong",
         "isHot": true
     },
     {
