@@ -1,37 +1,5 @@
 [
     {
-        "eventTitle": "ASIAN GAMES 2026",
-        "matchTime": "2026-09-24 06:00:00",
-        "team1Logo": "https://cricgo.pro/assets/logo.png",
-        "team2Logo": "https://cricgo.pro/assets/logo.png",
-        "team1Title": "",
-        "team2Title": "",
-        "streamLinks": [
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willow"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.st/watch.php?id=willowextra"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.xyz/watch.php?id=ptvsp"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.xyz/watch.php?id=ten1"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.st/watch.php?id=cricgo1"
-            }
-        ],
-        "streamLink": "https://cricgo.pro/events/asian-games-2026",
-        "isHot": true
-    },
-    {
         "eventTitle": "INTERNATIONAL CRICKET",
         "matchTime": "2026-09-24 14:00:00",
         "team1Logo": "https://cdn.cricgo.pro/team/australia/logo.webp",
@@ -53,15 +21,15 @@
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=fox501"
+                "channelLink": "https://playsza.st/watch.php?id=fox501"
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=crich2"
+                "channelLink": "https://playsza.xyz/watch.php?id=crich2"
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.st/watch.php?id=cricgo5"
+                "channelLink": "https://playsza.ru/watch.php?id=cricgo5"
             }
         ],
         "streamLink": "https://cricgo.pro/events/australia-vs-south-africa",
@@ -77,15 +45,11 @@
         "streamLinks": [
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.st/watch.php?id=willow"
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=starsp3"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.xyz/watch.php?id=starsp2"
+                "channelLink": "https://playsza.ru/watch.php?id=starsp2"
             },
             {
                 "channelName": "Stream Link",
@@ -97,7 +61,7 @@
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=starsp1tam"
+                "channelLink": "https://playsza.st/watch.php?id=starsp1tam"
             },
             {
                 "channelName": "Stream Link",
@@ -105,10 +69,38 @@
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.xyz/watch.php?id=crich11"
+                "channelLink": "https://playsza.st/watch.php?id=starsp4"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.xyz/watch.php?id=crich12"
             }
         ],
         "streamLink": "https://cricgo.pro/events/india-vs-west-indies",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-03 17:15:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
+        "team1Title": "",
+        "team2Title": "",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.xyz/watch.php?id=starsp1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.xyz/watch.php?id=starsp3"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/wcl-live-streaming",
         "isHot": true
     }
 ]
