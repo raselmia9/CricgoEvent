@@ -8,7 +8,7 @@
 🔵 [3/5] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/wcl-live-streaming
 🟢 সফল: https://cricgo.pro/events/wcl-live-streaming (চ্যানেল পাওয়া গেছে: 3 টি)
 🔵 [4/5] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/bangladesh-vs-afghanistan
-🟢 সফল: https://cricgo.pro/events/bangladesh-vs-afghanistan (চ্যানেল পাওয়া গেছে: 0 টি)
+🟢 সফল: https://cricgo.pro/events/bangladesh-vs-afghanistan (চ্যানেল পাওয়া গেছে: 2 টি)
 🔵 [5/5] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/pakistan-vs-sri-lanka
-🟢 সফল: https://cricgo.pro/events/pakistan-vs-sri-lanka (চ্যানেল পাওয়া গেছে: 0 টি)
+🟢 সফল: https://cricgo.pro/events/pakistan-vs-sri-lanka (চ্যানেল পাওয়া গেছে: 2 টি)
 🟢 সব কাজ সফলভাবে সম্পন্ন হয়েছে এবং data.json আপডেট করা হয়েছে!

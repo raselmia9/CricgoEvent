@@ -9,11 +9,11 @@
         "streamLinks": [
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willow"
+                "channelLink": "https://playsza.st/watch.php?id=willow"
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.st/watch.php?id=willowhd"
+                "channelLink": "https://playsza.ru/watch.php?id=willowhd"
             },
             {
                 "channelName": "Stream Link",
@@ -69,11 +69,11 @@
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.xyz/watch.php?id=astrocric"
+                "channelLink": "https://playsza.st/watch.php?id=astrocric"
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=cricgo2"
+                "channelLink": "https://playsza.xyz/watch.php?id=cricgo2"
             }
         ],
         "streamLink": "https://cricgo.pro/events/india-vs-west-indies",
@@ -89,11 +89,11 @@
         "streamLinks": [
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.xyz/watch.php?id=willowextra"
+                "channelLink": "https://playsza.st/watch.php?id=willowextra"
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.xyz/watch.php?id=starsp1"
+                "channelLink": "https://playsza.ru/watch.php?id=starsp1"
             },
             {
                 "channelName": "Stream Link",
@@ -110,7 +110,16 @@
         "team2Logo": "https://cdn.cricgo.pro/team/afghanistan/logo.webp",
         "team1Title": "Bangladesh",
         "team2Title": "Afghanistan",
-        "streamLinks": [],
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.xyz/watch.php?id=willowextra"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.xyz/watch.php?id=gtv"
+            }
+        ],
         "streamLink": "https://cricgo.pro/events/bangladesh-vs-afghanistan",
         "isHot": true
     },
@@ -121,7 +130,16 @@
         "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
         "team1Title": "Pakistan",
         "team2Title": "Sri Lanka",
-        "streamLinks": [],
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.xyz/watch.php?id=willowextra"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.st/watch.php?id=ptvsp"
+            }
+        ],
         "streamLink": "https://cricgo.pro/events/pakistan-vs-sri-lanka",
         "isHot": true
     }
