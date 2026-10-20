@@ -9,7 +9,7 @@
         "streamLinks": [
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
             },
             {
                 "channelName": "Stream Link",
@@ -25,7 +25,7 @@
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=cricgo2"
+                "channelLink": "https://playsza.ru/watch.php?id=crich2"
             },
             {
                 "channelName": "Stream Link",
@@ -33,38 +33,6 @@
             }
         ],
         "streamLink": "https://cricgo.pro/events/australia-vs-south-africa",
-        "isHot": true
-    },
-    {
-        "eventTitle": "INTERNATIONAL CRICKET",
-        "matchTime": "2026-10-20 14:00:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
-        "team1Title": "Pakistan",
-        "team2Title": "England",
-        "streamLinks": [
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willow"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willowhd"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=ptvsp"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=astrocric"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=crich2"
-            }
-        ],
-        "streamLink": "https://cricgo.pro/events/pakistan-vs-england",
         "isHot": true
     },
     {
@@ -98,7 +66,36 @@
         "team2Logo": "https://cdn.cricgo.pro/team/new-zealand/logo.webp",
         "team1Title": "India",
         "team2Title": "New Zealand",
-        "streamLinks": [],
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=ten1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=ten3"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=sonyespn"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=criclife1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=criclife2"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=criclife3"
+            }
+        ],
         "streamLink": "https://cricgo.pro/events/india-vs-new-zealand",
         "isHot": true
     },
@@ -121,9 +118,73 @@
             {
                 "channelName": "Stream Link",
                 "channelLink": "https://playsza.ru/watch.php?id=astrocric"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=crich2"
             }
         ],
         "streamLink": "https://cricgo.pro/events/england-vs-sri-lanka",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-25 14:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
+        "team1Title": "Pakistan",
+        "team2Title": "England",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willowhd"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=ptvsp"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=astrocric"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=crich2"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/pakistan-vs-england",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-27 14:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
+        "team1Title": "Pakistan",
+        "team2Title": "Sri Lanka",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willowhd"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=ptvsp"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=astrocric"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/pakistan-vs-sri-lanka",
         "isHot": true
     }
 ]
