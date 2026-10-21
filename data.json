@@ -37,30 +37,6 @@
     },
     {
         "eventTitle": "INTERNATIONAL CRICKET",
-        "matchTime": "2026-10-21 17:30:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/bangladesh/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/afghanistan/logo.webp",
-        "team1Title": "Bangladesh",
-        "team2Title": "Afghanistan",
-        "streamLinks": [
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=gtv"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=cricgo3"
-            }
-        ],
-        "streamLink": "https://cricgo.pro/events/bangladesh-vs-afghanistan",
-        "isHot": true
-    },
-    {
-        "eventTitle": "INTERNATIONAL CRICKET",
         "matchTime": "2026-10-22 13:00:00",
         "team1Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
         "team2Logo": "https://cdn.cricgo.pro/team/new-zealand/logo.webp",
