@@ -69,38 +69,6 @@
     },
     {
         "eventTitle": "INTERNATIONAL CRICKET",
-        "matchTime": "2026-10-25 14:00:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
-        "team1Title": "Pakistan",
-        "team2Title": "England",
-        "streamLinks": [
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willow"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willowhd"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=ptvsp"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=astrocric"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=crich2"
-            }
-        ],
-        "streamLink": "https://cricgo.pro/events/pakistan-vs-england",
-        "isHot": true
-    },
-    {
-        "eventTitle": "INTERNATIONAL CRICKET",
         "matchTime": "2026-10-27 14:00:00",
         "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
         "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
