@@ -69,6 +69,22 @@
     },
     {
         "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-26 16:45:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
+        "team1Title": "",
+        "team2Title": "",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=cricgo6"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/npl-t20",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
         "matchTime": "2026-10-27 14:00:00",
         "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
         "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
