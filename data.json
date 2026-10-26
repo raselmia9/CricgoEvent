@@ -9,7 +9,7 @@
         "streamLinks": [
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
             },
             {
                 "channelName": "Stream Link",
@@ -21,7 +21,7 @@
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=cricgo2"
+                "channelLink": "https://playsza.ru/watch.php?id=crich2"
             },
             {
                 "channelName": "Stream Link",
@@ -97,11 +97,7 @@
         "streamLinks": [
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willow"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willowhd"
+                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
             },
             {
                 "channelName": "Stream Link",
@@ -109,10 +105,46 @@
             },
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=astrocric"
+                "channelLink": "https://playsza.ru/watch.php?id=cricgo8"
             }
         ],
         "streamLink": "https://cricgo.pro/events/pakistan-vs-sri-lanka",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-27 20:30:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/afghanistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/zimbabwe/logo.webp",
+        "team1Title": "Afghanistan",
+        "team2Title": "Zimbabwe",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=cricgo1"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/afghanistan-vs-zimbabwe",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-28 10:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/bangladesh/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/west-indies/logo.webp",
+        "team1Title": "Bangladesh",
+        "team2Title": "West Indies",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=gtv"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=cricgo8"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/bangladesh-vs-west-indies",
         "isHot": true
     }
 ]
