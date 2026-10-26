@@ -6,7 +6,7 @@
 🔵 [2/4] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/india-vs-new-zealand
 🟢 সফল: https://cricgo.pro/events/india-vs-new-zealand (চ্যানেল পাওয়া গেছে: 6 টি)
 🔵 [3/4] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/npl-t20
-🟢 সফল: https://cricgo.pro/events/npl-t20 (চ্যানেল পাওয়া গেছে: 1 টি)
+🟢 সফল: https://cricgo.pro/events/npl-t20 (চ্যানেল পাওয়া গেছে: 2 টি)
 🔵 [4/4] পেজ ভিজিট করা হচ্ছে: https://cricgo.pro/events/pakistan-vs-sri-lanka
 🟢 সফল: https://cricgo.pro/events/pakistan-vs-sri-lanka (চ্যানেল পাওয়া গেছে: 4 টি)
 🟢 সব কাজ সফলভাবে সম্পন্ন হয়েছে এবং data.json আপডেট করা হয়েছে!

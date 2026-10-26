@@ -78,6 +78,10 @@
             {
                 "channelName": "Stream Link",
                 "channelLink": "https://playsza.ru/watch.php?id=cricgo2"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=cricgo3"
             }
         ],
         "streamLink": "https://cricgo.pro/events/npl-t20",
