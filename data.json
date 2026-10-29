@@ -106,5 +106,77 @@
         ],
         "streamLink": "https://cricgo.pro/events/bangladesh-vs-west-indies",
         "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-29 10:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
+        "team1Title": "",
+        "team2Title": "",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=fox501"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/womens-big-bash-2026",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-29 20:30:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/afghanistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/zimbabwe/logo.webp",
+        "team1Title": "Afghanistan",
+        "team2Title": "Zimbabwe",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=cricgo1"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/afghanistan-vs-zimbabwe",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-10-31 14:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
+        "team1Title": "Pakistan",
+        "team2Title": "Sri Lanka",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willowhd"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=ptvsp"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=astrocric"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=crich2"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/pakistan-vs-sri-lanka",
+        "isHot": true
     }
 ]
