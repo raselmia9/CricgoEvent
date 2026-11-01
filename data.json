@@ -57,26 +57,6 @@
     },
     {
         "eventTitle": "INTERNATIONAL CRICKET",
-        "matchTime": "2026-10-28 10:00:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/bangladesh/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/west-indies/logo.webp",
-        "team1Title": "Bangladesh",
-        "team2Title": "West Indies",
-        "streamLinks": [
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=gtv"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=cricgo8"
-            }
-        ],
-        "streamLink": "https://cricgo.pro/events/bangladesh-vs-west-indies",
-        "isHot": true
-    },
-    {
-        "eventTitle": "INTERNATIONAL CRICKET",
         "matchTime": "2026-10-29 10:00:00",
         "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
         "team2Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
