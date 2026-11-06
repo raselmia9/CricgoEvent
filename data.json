@@ -142,5 +142,16 @@
         ],
         "streamLink": "https://cricgo.pro/events/afghanistan-vs-zimbabwe",
         "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-11-09 10:30:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
+        "team1Title": "Pakistan",
+        "team2Title": "Sri Lanka",
+        "streamLinks": [],
+        "streamLink": "https://cricgo.pro/events/pakistan-vs-sri-lanka",
+        "isHot": true
     }
 ]
