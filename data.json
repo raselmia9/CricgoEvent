@@ -145,6 +145,34 @@
     },
     {
         "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-11-07 17:00:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/india/logo.webp",
+        "team1Title": "",
+        "team2Title": "",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=starsp1"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=asports"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/abu-dhabi-t10-league",
+        "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
         "matchTime": "2026-11-09 10:30:00",
         "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
         "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
