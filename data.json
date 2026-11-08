@@ -133,7 +133,7 @@
         "streamLinks": [
             {
                 "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willow"
+                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
             },
             {
                 "channelName": "Stream Link",
@@ -178,7 +178,20 @@
         "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
         "team1Title": "Pakistan",
         "team2Title": "Sri Lanka",
-        "streamLinks": [],
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willow"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=willowhd"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=ptvsp"
+            }
+        ],
         "streamLink": "https://cricgo.pro/events/pakistan-vs-sri-lanka",
         "isHot": true
     }
