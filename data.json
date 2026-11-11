@@ -150,5 +150,29 @@
         ],
         "streamLink": "https://cricgo.pro/events/pakistan-vs-sri-lanka",
         "isHot": true
+    },
+    {
+        "eventTitle": "INTERNATIONAL CRICKET",
+        "matchTime": "2026-11-13 09:30:00",
+        "team1Logo": "https://cdn.cricgo.pro/team/australia/logo.webp",
+        "team2Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
+        "team1Title": "Australia",
+        "team2Title": "England",
+        "streamLinks": [
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=fox501"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=cricgo5"
+            },
+            {
+                "channelName": "Stream Link",
+                "channelLink": "https://playsza.ru/watch.php?id=crich11"
+            }
+        ],
+        "streamLink": "https://cricgo.pro/events/australia-vs-england",
+        "isHot": true
     }
 ]
