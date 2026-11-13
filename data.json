@@ -133,26 +133,6 @@
     },
     {
         "eventTitle": "INTERNATIONAL CRICKET",
-        "matchTime": "2026-11-09 10:30:00",
-        "team1Logo": "https://cdn.cricgo.pro/team/pakistan/logo.webp",
-        "team2Logo": "https://cdn.cricgo.pro/team/sri-lanka/logo.webp",
-        "team1Title": "Pakistan",
-        "team2Title": "Sri Lanka",
-        "streamLinks": [
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=willowextra"
-            },
-            {
-                "channelName": "Stream Link",
-                "channelLink": "https://playsza.ru/watch.php?id=ptvsp"
-            }
-        ],
-        "streamLink": "https://cricgo.pro/events/pakistan-vs-sri-lanka",
-        "isHot": true
-    },
-    {
-        "eventTitle": "INTERNATIONAL CRICKET",
         "matchTime": "2026-11-13 09:30:00",
         "team1Logo": "https://cdn.cricgo.pro/team/australia/logo.webp",
         "team2Logo": "https://cdn.cricgo.pro/team/england/logo.webp",
